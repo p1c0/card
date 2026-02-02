@@ -65,29 +65,46 @@
     </div>
 
     <script>
-        const noBtn = document.getElementById('noBtn');
-        const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
 
-        noBtn.addEventListener('mouseover', () => {
-            // Move the button randomly within the viewport
-            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
+    function moveNoButton() {
+        const maxX = window.innerWidth - noBtn.offsetWidth - 40;
+        const maxY = window.innerHeight - noBtn.offsetHeight - 40;
 
-            noBtn.style.position = 'absolute';
-            noBtn.style.left = `${randomX}px`;
-            noBtn.style.top = `${randomY}px`;
-        });
+        const randomX = Math.floor(Math.random() * maxX);
+        const randomY = Math.floor(Math.random() * maxY);
 
-        yesBtn.addEventListener('click', () => {
-            alert('Yay! ❤️ Happy Valentine\'s Day!');
-        });
+        noBtn.style.position = 'absolute';
+        noBtn.style.left = `${randomX}px`;
+        noBtn.style.top = `${randomY}px`;
+    }
 
-        // Optional: Prevent clicking No by moving it on click attempt too
-        noBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Just in case, but mouseover should handle it
-        });
-    </script>
+    // Desktop: mouse hover
+    noBtn.addEventListener('mouseover', moveNoButton);
+
+    // Mobile: finger touching the button
+    noBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();           // helps prevent instant tap in some cases
+        moveNoButton();
+    });
+
+    // Optional: also move if they somehow manage to hold / long-press
+    noBtn.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        moveNoButton();
+    });
+
+    yesBtn.addEventListener('click', () => {
+        alert('Yay! ❤️ Happy Valentine\'s Day!');
+        // or: window.location.href = "https://tenor.com/view/happy-valentines-day-love-you-heart-gif-12345678" etc.
+    });
+
+    // Prevent actual click on No (extra safety)
+    noBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        moveNoButton();
+    });
+</script>
 </body>
 </html>
