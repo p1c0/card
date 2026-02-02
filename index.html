@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        .container {
+            background-color: #333;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #yesBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #yesBtn:hover {
+            background-color: #45a049;
+        }
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            position: relative;
+        }
+        #noBtn:hover {
+            background-color: #da190b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Would you like to be my valentine?</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+
+        noBtn.addEventListener('mouseover', () => {
+            // Move the button randomly within the viewport
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
+        });
+
+        yesBtn.addEventListener('click', () => {
+            alert('Yay! ❤️ Happy Valentine\'s Day!');
+        });
+
+        // Optional: Prevent clicking No by moving it on click attempt too
+        noBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Just in case, but mouseover should handle it
+        });
+    </script>
+</body>
+</html>
